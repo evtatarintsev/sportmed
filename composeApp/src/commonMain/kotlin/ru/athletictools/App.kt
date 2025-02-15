@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ru.athletictools.api.HttpClient
+import ru.athletictools.api.HttpApiClient
 import ru.athletictools.api.PatientListItem
 import ru.athletictools.api.PatientListRequest
 import ru.athletictools.ui.PatientList
@@ -16,7 +16,7 @@ import ru.athletictools.ui.PatientList
 
 @Composable
 @Preview
-fun App(apiClient: HttpClient) {
+fun App(apiClient: HttpApiClient) {
     val apiScope = rememberCoroutineScope()
     var patients = mutableStateListOf<PatientListItem>()
 

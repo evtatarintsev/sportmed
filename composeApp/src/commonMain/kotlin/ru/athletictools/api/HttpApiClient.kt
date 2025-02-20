@@ -1,7 +1,9 @@
 package ru.athletictools.api
 
-class HttpApiClient {
+import io.ktor.client.HttpClient
+
+class HttpApiClient(httpClient: HttpClient) {
     suspend fun patients(request: PatientListRequest): PatientListResponse {
-        return PatientListResponse(patients = listOf(PatientListItem(1, "Ivqn")), total = 1)
+        return PatientListResponse(patients = IntRange(0, 100).map { PatientListItem(it, "Ivqn-$it") }, total = 1)
     }
 }

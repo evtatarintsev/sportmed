@@ -13,6 +13,6 @@ internal object PatientsTable : Table() {
 
 class SqliteStore(private val dbFile: File) : PatientStore {
     override suspend fun list(): List<Patient> {
-        return listOf(Patient(1, "Ivan"), Patient(2, "Petr"))
+        return IntRange(0, 100).map { Patient(it, "Ivqn-$it") }
     }
 }

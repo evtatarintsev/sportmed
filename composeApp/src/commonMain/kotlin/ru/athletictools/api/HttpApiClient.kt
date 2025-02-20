@@ -1,9 +1,25 @@
 package ru.athletictools.api
 
-import io.ktor.client.HttpClient
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.serialization.kotlinx.json.*
 
-class HttpApiClient(httpClient: HttpClient) {
+
+class HttpApiClient() {
+    private val httpClient = HttpClient(CIO) {
+        defaultRequest {
+            url("http://localhost:8080")
+        }
+        install(ContentNegotiation) {
+            json()
+        }
+    }
+
     suspend fun patients(request: PatientListRequest): PatientListResponse {
-        return PatientListResponse(patients = IntRange(0, 100).map { PatientListItem(it, "Ivqn-$it") }, total = 1)
+        return httpClient.get("/api/patients/list").body()
     }
 }
